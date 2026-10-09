@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id" data-terenkripsi>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Katalog Peralatan Lab Prodi 2026 · Poltek SSN</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Katalog peralatan Lab Prodi Politeknik Siber dan Sandi Negara tahun 2025: fungsi, jumlah, kelengkapan, dan kondisi tiap alat.">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    // Terapkan tema sebelum halaman digambar agar tidak berkedip.
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("tema"); } catch (e) {}
+      if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "gelap" : "terang";
+      document.documentElement.dataset.tema = t;
+    })();
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#katalog">Langsung ke katalog</a>
+
+  <header class="topbar">
+    <div class="wrap topbar__in">
+      <a class="brand" href="#ringkasan">
+        <img src="img/logo-bssn.png" alt="" width="56" height="40">
+        <span>
+          <strong>Katalog Peralatan Lab Prodi</strong>
+          <small>Poltek SSN · 2026</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Navigasi utama">
+        <a href="#ringkasan">Ringkasan</a>
+        <a href="#katalog">Katalog</a>
+      </nav>
+      <button class="iconbtn" id="btnTema" type="button" aria-label="Ganti tema terang/gelap" title="Ganti tema">
+        <svg class="ic-bulan" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        <svg class="ic-matahari" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="ringkasan">
+      <div class="wrap">
+        <p class="eyebrow">Lab Prodi · Politeknik Siber dan Sandi Negara</p>
+        <h1>Katalog Peralatan Lab Prodi 2026</h1>
+        <p class="lead">Daftar peralatan persandian, pengacak sinyal, dan kontra-penyadapan yang dikelola Lab Prodi, lengkap dengan fungsi, jumlah, kelengkapan sistem, dan kondisi terkininya.</p>
+
+        <div class="stats" id="stats"></div>
+
+        <div class="kondisi">
+          <div class="kondisi__head">
+            <h2>Kondisi seluruh unit</h2>
+            <span id="kondisiTotal"></span>
+          </div>
+          <div class="bar" id="bar" role="img"></div>
+          <ul class="legend" id="legend"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="katalog" id="katalog">
+      <div class="wrap">
+        <div class="toolbar">
+          <label class="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="cari" type="search" placeholder="Cari nama alat atau fungsi…" autocomplete="off" aria-label="Cari alat">
+          </label>
+          <label class="pilih">
+            <span>Urutkan</span>
+            <select id="urut">
+              <option value="katalog">Urutan katalog</option>
+              <option value="nama">Nama (A–Z)</option>
+              <option value="jumlah">Jumlah terbanyak</option>
+              <option value="tahun">Tahun terbaru</option>
+            </select>
+          </label>
+          <div class="seg" role="group" aria-label="Tampilan">
+            <button type="button" data-tampilan="kartu" aria-pressed="true" title="Tampilan kartu">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+              <span>Kartu</span>
+            </button>
+            <button type="button" data-tampilan="tabel" aria-pressed="false" title="Tampilan tabel">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+              <span>Tabel</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="filter">
+          <span class="filter__label">Lab</span>
+          <div class="chips" id="chipLab"></div>
+        </div>
+        <div class="filter">
+          <span class="filter__label">Kategori</span>
+          <div class="chips" id="chipKategori"></div>
+        </div>
+        <div class="filter">
+          <span class="filter__label">Kondisi</span>
+          <div class="chips" id="chipStatus"></div>
+        </div>
+
+        <p class="hasil" id="hasil" aria-live="polite"></p>
+
+        <div class="grid" id="grid"></div>
+
+        <div class="tabelwrap" id="tabelwrap" hidden>
+          <table class="tabel">
+            <thead>
+              <tr>
+                <th>No</th><th>Nama alat</th><th>Lab</th><th>Kategori</th><th>Tahun</th><th class="num">Jumlah</th><th>Sistem</th><th>Kondisi</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+
+        <div class="kosong" id="kosong" hidden>
+          <p>Tidak ada alat yang cocok dengan pencarian atau filter ini.</p>
+          <button class="btn" id="btnReset" type="button">Hapus semua filter</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>Sumber data: <em>Katalog Peralatan Lab Prodi 2026</em> · Unit kerja penanggung jawab: Lab Prodi Poltek SSN.</p>
+    </div>
+  </footer>
+
+  <button class="keatas" id="keAtas" type="button" aria-label="Kembali ke atas" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <dialog class="detail" id="detail" aria-labelledby="dNama">
+    <div class="detail__bar">
+      <span class="detail__pos" id="dPos"></span>
+      <div class="detail__nav">
+        <button class="iconbtn" id="dPrev" type="button" aria-label="Alat sebelumnya" title="Sebelumnya (←)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
+        </button>
+        <button class="iconbtn" id="dNext" type="button" aria-label="Alat berikutnya" title="Berikutnya (→)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+        </button>
+        <button class="iconbtn" id="dTutup" type="button" aria-label="Tutup" title="Tutup (Esc)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="detail__body" id="dBody"></div>
+  </dialog>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
